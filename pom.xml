@@ -83,6 +83,19 @@
             <artifactId>jakarta.ejb-api</artifactId>
             <version>4.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.12</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>10.0.0</version>
+            <classifier>jakarta</classifier>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     
     <build>
