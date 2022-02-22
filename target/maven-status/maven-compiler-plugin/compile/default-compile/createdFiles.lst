@@ -1,3 +1,4 @@
+com\makosdanii\mywebapplication\beans\HomeBean.class
 com\makosdanii\mywebapplication\data\entity\Users.class
 com\makosdanii\mywebapplication\JakartaRestConfiguration.class
 com\makosdanii\mywebapplication\beans\Persistance_mysql.class

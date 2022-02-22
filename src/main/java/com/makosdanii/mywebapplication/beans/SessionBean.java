@@ -8,7 +8,7 @@ import com.makosdanii.mywebapplication.data.entity.Users;
 import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.ejb.Stateless;
+//import jakarta.ejb.Stateless;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -19,7 +19,7 @@ import jakarta.persistence.Query;
  * @author user
  */
 @Named("session")
-@Stateless
+//@Stateless
 @DataSourceDefinition(
         name = "com.makosdanii_mywebapplication_war_1.0-SNAPSHOTPU",
         className = "com.mysql.cj.jdbc.Driver",

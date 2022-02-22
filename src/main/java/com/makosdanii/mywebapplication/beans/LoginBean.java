@@ -7,8 +7,12 @@ package com.makosdanii.mywebapplication.beans;
 import jakarta.annotation.ManagedBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
+import jakarta.faces.event.ActionEvent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import java.io.IOException;
 
 /**
  *
@@ -18,17 +22,16 @@ import jakarta.inject.Named;
 @Named("login")
 public class LoginBean {
 
-private boolean rememberme;
+    private boolean rememberme;
 
     private boolean isAdmin;
-    private String val = "";
+    private String val = "hello";
     private String email;
     private String password;
     private Persistance_mysql database;
 
-    @Inject
-    SessionBean sessionBean;
-
+//    @Inject
+//    SessionBean sessionBean;
     @PostConstruct
     private void init() {
         database = new Persistance_mysql();
@@ -88,9 +91,18 @@ private boolean rememberme;
         }
 
         val = "Hello " + email + " " + result;
+
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Not logged in", null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public void SignIn() {
-        greet();
+    public void signIn() {
+        isAdmin = email.contains("admin");
+        try {
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("faces/homepage.xhtml?isAdmin=" + (isAdmin ? "true" : "false"));
+        } catch (IOException e) {
+        }
+//        return "faces/homepage.xhtml?isAdmin=" + (isAdmin ? "true" : "false");
     }
 }

@@ -34,6 +34,7 @@ public class Persistance_mysql {
 
     public Persistance_mysql() {
         DOMConfigurator.configure("C:\\Users\\user\\NetBeansProjects\\mywebapplication\\log4j.xml");
+logger.info("Started");
     }
 
 //    private void createFileHandler() {
