@@ -1,13 +1,48 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
     <h:head>
         <title>Welcome Admin</title>
     </h:head>
     <h:body>
-        <h:outputText rendered="#{home.loggedIn}" value="Please log in as admin to view this page!"/>
-        
+        <h:outputText rendered="#{!home.loggedIn}" value="Please log in!"/>
+        <h:outputText rendered="#{!sessionScope.isAdmin &amp;&amp; home.loggedIn}" 
+                      value="Please log in as admin to view this page!"/>        
+
+        <h:form>
+            <h:commandButton rendered="#{sessionScope.isAdmin}" value="Log out" action="#{home.destroySession}"/>
+
+        </h:form>
+
+        <h:panelGroup rendered="#{sessionScope.isAdmin}" layout="block" id="dataTableDiv">
+            <h:dataTable border="3" value="#{home.users}" var="user">
+                <h:column>
+                    <f:facet name="Email">
+                        Dessert Name
+                    </f:facet>
+                    <h:outputText value="#{user.email}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="Name">
+                        Say Hello Hyperlink
+                    </f:facet>
+                    <h:outputText value="#{user.firstname} #{user.lastname}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="Address">
+                        <h:outputText value="#{user.address}"/>
+                    </f:facet>
+                </h:column>
+                <h:column>
+                    <f:facet name="Password">
+                        <h:outputText value="#{user.password}"/>
+                    </f:facet>
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
     </h:body>
 </html>
 

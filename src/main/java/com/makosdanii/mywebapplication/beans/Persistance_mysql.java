@@ -4,6 +4,7 @@
  */
 package com.makosdanii.mywebapplication.beans;
 
+import com.makosdanii.mywebapplication.data.entity.Roles;
 import com.makosdanii.mywebapplication.data.entity.Users;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -34,7 +35,7 @@ public class Persistance_mysql {
 
     public Persistance_mysql() {
         DOMConfigurator.configure("C:\\Users\\user\\NetBeansProjects\\mywebapplication\\log4j.xml");
-logger.info("Started");
+        logger.info("Started");
     }
 
 //    private void createFileHandler() {
@@ -64,21 +65,40 @@ logger.info("Started");
         }
     }
 
-    public List<Users> executeQueryUsers(String query) {
+    public List<Users> executeQueryLogin(String email) {
+        String query = String.format("select email, password, rolename from users join roles on roleid = id where email like '%s'",
+                email);
+
         List<Users> result = new ArrayList<>();
 
         try {
             ResultSet set = con.createStatement().executeQuery(query);
 
             while (set.next()) {
-                result.add(new Users(set.getString(1), set.getString(2),
-                        set.getString(3), set.getString(4),
-                        set.getInt(4), null));
+                result.add(new Users(set.getString(1), "",
+                        "", "", set.getString(2), -1, new Roles(-1, set.getString(3), null)));
             }
         } catch (SQLException e) {
             logger.error("error while executing query " + e.getMessage());
         }
 
+        return result;
+    }
+
+    public List<Users> executeQueryListUsers() {
+        List<Users> result = new ArrayList<>();
+
+        try {
+            ResultSet set = con.createStatement().executeQuery("select * from users join roles on roleid = id where rolename not like 'admin'");
+
+            while (set.next()) {
+                result.add(new Users(set.getString(1), set.getString(2), set.getString(3),
+                        set.getString(4), set.getString(5), set.getInt(6),
+                        new Roles(set.getInt(7), set.getString(8), null)));
+            }
+        } catch (SQLException e) {
+            logger.error("error while executing query " + e.getMessage());
+        }
         return result;
     }
 

@@ -4,13 +4,19 @@
  */
 package com.makosdanii.mywebapplication.beans;
 
+import com.makosdanii.mywebapplication.data.entity.Users;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -20,24 +26,38 @@ import java.time.Instant;
 @SessionScoped
 public class HomeBean implements Serializable {
 
-    private boolean isAdmin;
-    private boolean loggedIn;
+    private boolean loggedIn = false;
     private long sessionCreationTime;
     private final long SESSION_TIME_60SEC_IN_MILLI = 60000;
 
+    private Persistance_mysql database;
+    List<Users> users;
+
     @PostConstruct
     public void init() {
-        isAdmin = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("isAdmin") == "true";
-        loggedIn = false;
-        this.getSession();
+        database = new Persistance_mysql();
+        try {
+            database.connect("root", "mydb140222!");
+        } catch (RuntimeException e) {
+            System.err.println("com.makosdanii.mywebapplication.beans.Login.init()");
+        }
+
+//        HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+//                .getRequest();
+        ExternalContext req = FacesContext.getCurrentInstance().getExternalContext();
+
+        if (req != null && req.getSessionMap().containsKey("isAdmin")) {
+            users = database.executeQueryListUsers();
+            this.getSession();
+        }
     }
 
-    public boolean isIsAdmin() {
-        return isAdmin;
+    public List<Users> getUsers() {
+        return users;
     }
 
-    public void setIsAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setUsers(List<Users> users) {
+        this.users = users;
     }
 
     public boolean isLoggedIn() {
@@ -57,18 +77,24 @@ public class HomeBean implements Serializable {
     }
 
     public void getSession() {
-        if (!loggedIn) {
-            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(isAdmin);
-            if (session.isNew()) {
-                loggedIn = true;
-                sessionCreationTime = session.getCreationTime();
-            }
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+
+        if (session != null) {
+            sessionCreationTime = session.getCreationTime();
+            loggedIn = true;
         }
 
         if (Instant.now().toEpochMilli() - sessionCreationTime > SESSION_TIME_60SEC_IN_MILLI) {
-            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-
-            loggedIn = false;
+            destroySession();
         }
+    }
+
+    public String destroySession() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+//        try {
+//            FacesContext.getCurrentInstance().getExternalContext().redirect("faces/loginpage.xhtml");
+//        } catch (IOException e) {
+//        }
+        return "faces/loginpage.xhtml";
     }
 }

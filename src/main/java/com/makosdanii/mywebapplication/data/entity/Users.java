@@ -40,6 +40,10 @@ public class Users implements Serializable {
     private String address;
 
     @NotNull
+    @Column(name = "password")
+    private String password;
+
+    @NotNull
     @Column(name = "roleid")
     private int roleid;
 
@@ -47,16 +51,25 @@ public class Users implements Serializable {
     @PrimaryKeyJoinColumn(name = "roleid", referencedColumnName = "id")
     private Roles role;
 
-    public Users(String email, String firstname, String lastname, String address, int roleid, Roles role) {
+    public Users(String email, String firstname, String lastname, String address, String password, int roleid, Roles role) {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
         this.address = address;
+        this.password = password;
         this.roleid = roleid;
         this.role = role;
     }
 
     public Users() {
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -95,8 +108,18 @@ public class Users implements Serializable {
         return roleid;
     }
 
-    public void setRoleid(int roleid) {
+    private void setRoleid(int roleid) {
         this.roleid = roleid;
     }
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
+
 
 }

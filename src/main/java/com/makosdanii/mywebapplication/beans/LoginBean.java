@@ -4,6 +4,7 @@
  */
 package com.makosdanii.mywebapplication.beans;
 
+import com.makosdanii.mywebapplication.data.entity.Users;
 import jakarta.annotation.ManagedBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
@@ -12,7 +13,10 @@ import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.ActionEvent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -29,9 +33,11 @@ public class LoginBean {
     private String email;
     private String password;
     private Persistance_mysql database;
+    private final String ADMIN = "admin";
 
 //    @Inject
 //    SessionBean sessionBean;
+
     @PostConstruct
     private void init() {
         database = new Persistance_mysql();
@@ -82,27 +88,30 @@ public class LoginBean {
         this.val = val;
     }
 
-    public void greet() {
-        isAdmin = email.contains("admin");
-        String result = "";
-
-        if (database.connectionCheck() && isAdmin) {
-            result = database.executeQueryUsers("select * from users").get(0).getEmail();
-        }
-
-        val = "Hello " + email + " " + result;
-
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Not logged in", null);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
-
     public void signIn() {
-        isAdmin = email.contains("admin");
-        try {
-            FacesContext.getCurrentInstance().getExternalContext()
-                    .redirect("faces/homepage.xhtml?isAdmin=" + (isAdmin ? "true" : "false"));
-        } catch (IOException e) {
+        if (database.connectionCheck()) {
+            List<Users> result = database.executeQueryLogin(email);
+
+            if (result.size() == 0) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Not registered", null);
+                FacesContext.getCurrentInstance().addMessage("myform:email", message);
+                return;
+            }
+
+            if (!result.get(0).getPassword().equals(this.password)) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Incorrect password", null);
+                FacesContext.getCurrentInstance().addMessage("myform:passw", message);
+                return;
+            }
+
+            try {
+                HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+                session.setAttribute("isAdmin", result.get(0).getRole().getRolename().equals(ADMIN));
+                FacesContext.getCurrentInstance().getExternalContext()
+                        .redirect("faces/homepage.xhtml");
+            } catch (IOException e) {
+            }
         }
-//        return "faces/homepage.xhtml?isAdmin=" + (isAdmin ? "true" : "false");
+
     }
 }

@@ -1,8 +1,0 @@
-com\makosdanii\mywebapplication\beans\HomeBean.class
-com\makosdanii\mywebapplication\data\entity\Users.class
-com\makosdanii\mywebapplication\JakartaRestConfiguration.class
-com\makosdanii\mywebapplication\beans\Persistance_mysql.class
-com\makosdanii\mywebapplication\beans\LoginBean.class
-com\makosdanii\mywebapplication\data\entity\Roles.class
-com\makosdanii\mywebapplication\resources\JakartaEE9Resource.class
-com\makosdanii\mywebapplication\beans\SessionBean.class
