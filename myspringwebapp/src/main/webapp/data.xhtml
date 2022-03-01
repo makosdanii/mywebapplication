@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/xhtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <h:body>
+        <h:panelGroup layout="block" id="dataTable">
+            <h:dataTable border="1" value="#{data.users}" var="user">
+                <h:column>
+                    <f:facet name="Email">Email</f:facet>
+                    <h:outputText value="#{user.email}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="Name">Name</f:facet>
+                    <h:outputText value="#{user.firstname} #{user.lastname}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="Address">Address</f:facet>
+                    <h:outputText value="#{user.address}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="Passworld">Passworld</f:facet>
+                    <h:outputText value="#{user.password}" />
+                </h:column>
+            </h:dataTable>
+        </h:panelGroup>
+
+        <h:form >
+            <input id="search" name="query" value="#{param['query']}"> 
+            </input>
+            <f:param name="query" value="#{param['query']}" />
+            <h:commandButton  value="Search" action="#{data.filter}">
+                <f:ajax execute="search" render="dataTable"/>
+            </h:commandButton> />
+        </h:form>
+
+    </h:body>
+</html>
