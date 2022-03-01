@@ -21,25 +21,23 @@
             <h:dataTable border="3" value="#{home.users}" var="user">
                 <h:column>
                     <f:facet name="Email">
-                        Dessert Name
+                        Email
                     </f:facet>
                     <h:outputText value="#{user.email}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="Name">
-                        Say Hello Hyperlink
+                        Name
                     </f:facet>
                     <h:outputText value="#{user.firstname} #{user.lastname}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="Address">
+                    <f:facet name="Address">Address</f:facet>
                         <h:outputText value="#{user.address}"/>
-                    </f:facet>
                 </h:column>
                 <h:column>
-                    <f:facet name="Password">
-                        <h:outputText value="#{user.password}"/>
-                    </f:facet>
+                    <f:facet name="Password">Password</f:facet>
+                        <h:outputText value="#{user.password}">  
                 </h:column>
             </h:dataTable>
         </h:panelGroup>
