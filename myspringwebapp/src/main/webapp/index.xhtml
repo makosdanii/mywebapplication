@@ -4,12 +4,29 @@
     <h:head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-        <title>TO-DO application</title>
+        <title>Welcome - Login</title>
     </h:head>
     <h:body>
         <div>
-            <h:form>
-                <h:commandButton value="Load data page!" action="#{jsf.redirectData}" />
+            <h:form id="authform" rendered="#{!sessionScope.isAdmin}">
+                <h:inputText id="user" value="#{jsf.user}"/>
+                <h:inputSecret id="passw" value="#{jsf.passw}"/>
+                <h:commandButton value="Login" action="#{jsf.login}"/>
+                <br/>
+                <h:message for="passw"/>
+                <h:message for="user"/>
+            </h:form>
+            <h:form rendered="#{sessionScope.isAdmin}">
+                <h:commandButton value="Logout" action="#{jsf.logout}"/>
+            </h:form>
+        </div>
+        <div>
+            <h:form rendered="#{sessionScope.isAdmin}">
+                <h:commandButton value="New admin" action="/register.xhtml"/>
+                <br/>
+                <h:commandLink value="List users" 
+                                 action="/data.xhtml?faces-redirect=true"/>
+                                 
             </h:form>
         </div>
     </h:body>

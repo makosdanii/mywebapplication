@@ -4,23 +4,25 @@
  */
 package com.makosdanii.myspringwebapp.entity;
 
-
 import com.sun.istack.NotNull;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
 
 /**
  *
  * @author user
  */
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class Users implements Serializable {
 
     @Id
@@ -42,13 +44,9 @@ public class Users implements Serializable {
     @Column(name = "password")
     private String password;
 
-//    @NotNull
-//    @Column(name = "roleid")
-//    private int roleid;
-
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "roleid", referencedColumnName = "id")
-    private Roles role;
+    private Roles roles;
 
     public Users(String email, String firstname, String lastname, String address, String password, Roles role) {
         this.email = email;
@@ -56,7 +54,7 @@ public class Users implements Serializable {
         this.lastname = lastname;
         this.address = address;
         this.password = password;
-        this.role = role;
+        this.roles = role;
     }
 
     public Users() {
@@ -102,12 +100,11 @@ public class Users implements Serializable {
         this.address = address;
     }
 
-    public Roles getRole() {
-        return role;
+    public Roles getRoles() {
+        return roles;
     }
 
-    public void setRole(Roles role) {
-        this.role = role;
+    public void setRoles(Roles roles) {
+        this.roles = roles;
     }
-
 }

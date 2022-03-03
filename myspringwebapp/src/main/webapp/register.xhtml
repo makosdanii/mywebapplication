@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/xhtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <title>Register users</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <h:body>
+        <h:form>
+            <label for="email">email</label>
+            <h:inputText id="email" value="#{registrate.email}"/>
+            <br/>
+            <label for="firstname">firstname</label>
+            <h:inputText id="firstname" value="#{registrate.firstname}"/>
+            <br/>
+            <label for="lastname">lastname</label>
+            <h:inputText id="lastname" value="#{registrate.lastname}"/>
+            <br/>
+            <label for="address">address</label>
+            <h:inputText id="address" value="#{registrate.address}"/>
+            <br/>
+            <label for="password">password</label>
+            <h:inputSecret id="password" value="#{registrate.password}"/>
+            <br/>
+            <label for="isAdminCheckbox">Admin user: </label>
+            <h:selectBooleanCheckbox id="isAdminCheck"
+                value = "#{registrate.isAdmin}" disabled="#{!sessionScope.isAdmin}"/>
+            <h:commandButton value="Registrate" action="#{registrate.registrate}" />
+        </h:form>
+    </h:body>
+</html>

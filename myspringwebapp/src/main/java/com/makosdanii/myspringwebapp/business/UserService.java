@@ -4,6 +4,7 @@
  */
 package com.makosdanii.myspringwebapp.business;
 
+import com.makosdanii.myspringwebapp.entity.Roles;
 import com.makosdanii.myspringwebapp.entity.Users;
 import com.makosdanii.myspringwebapp.repository.RoleRepository;
 import com.makosdanii.myspringwebapp.repository.UserRepository;
@@ -23,6 +24,9 @@ import org.springframework.stereotype.Service;
 //@Qualifier("userService")
 public class UserService {
 
+    private final int ADMIN_ROLE = 1;
+    private final int USER_ROLE = 2;
+
     private final UserRepository userRepo;
     private final RoleRepository roleRepo;
 
@@ -36,8 +40,30 @@ public class UserService {
         return userRepo.findAllById(Arrays.asList(id));
     }
 
-    public Users getUser(String id) {
+    public Users searchUser(String id) {
         return userRepo.findById(id).orElse(new Users());
+    }
+
+    public void addUser(String email, String firstname,
+            String lastname, String address, String password, Boolean isAdmin) {
+
+        Roles r;
+        if (isAdmin) {
+            r = this.roleRepo.findById(ADMIN_ROLE).orElse(new Roles());
+        } else {
+            r = this.roleRepo.findById(USER_ROLE).orElse(new Roles());
+        }
+
+        userRepo.save(new Users(email, firstname, lastname,
+                address, password, r));
+    }
+
+    public boolean deleteUser(String id) {
+        if (userRepo.existsById(id)) {
+            userRepo.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
 }

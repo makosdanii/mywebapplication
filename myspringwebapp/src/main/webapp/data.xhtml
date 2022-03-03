@@ -8,28 +8,33 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/xhtml.xhtml to edit this te
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       >
-    <head>
-        <title>TODO supply a title</title>
+    <h:head>
+        <title>Listed users</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <h:body>
+    </h:head>
+    <h:body rendered="#{sessionScope.isAdmin}">
         <h:panelGroup layout="block" id="dataTable">
             <h:dataTable border="1" value="#{data.users}" var="user">
                 <h:column>
-                    <f:facet name="Email">Email</f:facet>
+                    <f:facet name="header">Email</f:facet>
                     <h:outputText value="#{user.email}" />
                 </h:column>
                 <h:column>
-                    <f:facet name="Name">Name</f:facet>
+                    <f:facet name="header">Name</f:facet>
                     <h:outputText value="#{user.firstname} #{user.lastname}" />
                 </h:column>
                 <h:column>
-                    <f:facet name="Address">Address</f:facet>
+                    <f:facet name="header">Address</f:facet>
                     <h:outputText value="#{user.address}" />
                 </h:column>
                 <h:column>
-                    <f:facet name="Passworld">Passworld</f:facet>
+                    <f:facet name="header">Passworld</f:facet>
                     <h:outputText value="#{user.password}" />
+                </h:column>
+                <h:column>
+                    <a href="/delete?id=#{user.email}">delete</a>
+                    <!--<f:param name="id" value="#{user.email}" />-->
+                    <!--<h:commandLink value="delete" action="/delete"/>-->
                 </h:column>
             </h:dataTable>
         </h:panelGroup>
@@ -39,9 +44,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/xhtml.xhtml to edit this te
             </input>
             <f:param name="query" value="#{param['query']}" />
             <h:commandButton  value="Search" action="#{data.filter}">
-                <f:ajax execute="search" render="dataTable"/>
-            </h:commandButton> />
-        </h:form>
+                <f:ajax execute="@this" render="dataTable" listener="#{data.ajaxFilter}"/>
+            </h:commandButton>
+        </h:form>   
 
     </h:body>
 </html>

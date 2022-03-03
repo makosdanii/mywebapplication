@@ -20,23 +20,23 @@
         <h:panelGroup rendered="#{sessionScope.isAdmin}" layout="block" id="dataTableDiv">
             <h:dataTable border="3" value="#{home.users}" var="user">
                 <h:column>
-                    <f:facet name="Email">
+                    <f:facet name="header">
                         Email
                     </f:facet>
                     <h:outputText value="#{user.email}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="Name">
+                    <f:facet name="header">
                         Name
                     </f:facet>
                     <h:outputText value="#{user.firstname} #{user.lastname}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="Address">Address</f:facet>
+                    <f:facet name="header">Address</f:facet>
                         <h:outputText value="#{user.address}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="Password">Password</f:facet>
+                    <f:facet name="header">Password</f:facet>
                         <h:outputText value="#{user.password}">  
                 </h:column>
             </h:dataTable>

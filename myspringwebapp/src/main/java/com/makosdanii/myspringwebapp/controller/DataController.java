@@ -11,9 +11,11 @@ import com.makosdanii.myspringwebapp.repository.UserRepository;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +28,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -41,23 +46,20 @@ import org.springframework.web.servlet.ModelAndView;
 @Configuration
 @ComponentScan("com.makosdanii.mywebapplication.business")
 
-@Controller(value = "data")
-@Scope("session")
-
-@RequestMapping("/dataQuery")
+@RestController(value = "data")
+@RequestScope
 public class DataController implements Serializable {
 
     @Autowired
-    public DataController(UserRepository repoUser, RoleRepository repoRole) {
+    public DataController(UserRepository repoUser, RoleRepository repoRole, UserService userServ) {
         this.repoUser = repoUser;
         this.repoRole = repoRole;
+        this.userServ = userServ;
     }
 
     private final UserRepository repoUser;
     private final RoleRepository repoRole;
-
-    @Inject
-    private UserService userServ;
+    private final UserService userServ;
 
     private Users queried;
 
@@ -97,11 +99,27 @@ public class DataController implements Serializable {
 
     }
 
-    @GetMapping
-    @ResponseBody
-    public ModelAndView Filter(@RequestParam(value = "id", required = false) String id) {
-        this.queried = userServ.getUser(id);
-        return new ModelAndView("/data.xhtml", "bean", queried);
+    @GetMapping("/delete")
+    public String delete(@RequestParam(value = "id", required = false) String id,
+            HttpServletRequest request) {
+        boolean deleted = false;
+        Object isAdmin = request.getSession().getAttribute("isAdmin");
+        if (isAdmin != null && (boolean) isAdmin) {
+            deleted = userServ.deleteUser(id);
+        }
+
+        return deleted ? "deleted" : "failed to delete";
     }
 
+    public void remove() {
+        userServ.deleteUser(
+                ((HttpServletRequest) FacesContext.getCurrentInstance()
+                        .getExternalContext()
+                        .getRequest())
+                        .getParameter("id"));
+    }
+
+    public void ajaxFilter(AjaxBehaviorEvent event) {
+        filter();
+    }
 }

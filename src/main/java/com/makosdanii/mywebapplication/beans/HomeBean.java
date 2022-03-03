@@ -77,16 +77,16 @@ public class HomeBean implements Serializable {
     }
 
     public void getSession() {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        if (sessionCreationTime != 0 && Instant.now().toEpochMilli() - sessionCreationTime > SESSION_TIME_60SEC_IN_MILLI) {
+            destroySession();
+        }
 
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         if (session != null) {
             sessionCreationTime = session.getCreationTime();
             loggedIn = true;
         }
 
-        if (Instant.now().toEpochMilli() - sessionCreationTime > SESSION_TIME_60SEC_IN_MILLI) {
-            destroySession();
-        }
     }
 
     public String destroySession() {

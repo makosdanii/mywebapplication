@@ -4,7 +4,6 @@
  */
 package com.makosdanii.myspringwebapp.entity;
 
-
 import com.sun.istack.NotNull;
 import java.io.Serializable;
 import javax.persistence.Column;
@@ -17,10 +16,10 @@ import javax.persistence.Table;
 
 /**
  *
- * @author user
+ * @author users
  */
 @Entity
-@Table(name = "Roles")
+@Table(name = "roles")
 public class Roles implements Serializable {
 
     @Id
@@ -29,16 +28,16 @@ public class Roles implements Serializable {
     private Integer id;
 
     @NotNull
-    @Column(name = "rolename")
+    @Column(name = "rolename", unique = true)
     private String rolename;
 
-    @OneToOne(mappedBy = "role")
-    private Users user;
+//    @OneToOne(mappedBy = "roles")
+    private Users users;
 
     public Roles(Integer id, String rolename, Users user) {
         this.id = id;
         this.rolename = rolename;
-        this.user = user;
+        this.users = user;
     }
 
     public Roles() {
@@ -59,4 +58,13 @@ public class Roles implements Serializable {
     public void setRolename(String rolename) {
         this.rolename = rolename;
     }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
 }
