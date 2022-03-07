@@ -22,10 +22,11 @@
         </div>
         <div>
             <h:form rendered="#{sessionScope.isAdmin}">
-                <h:commandButton value="New admin" action="/register.xhtml"/>
+                <h:commandButton value="New admin" 
+                                 action="/myspringwebapp/register.xhtml"/>
                 <br/>
                 <h:commandLink value="List users" 
-                                 action="/data.xhtml?faces-redirect=true"/>
+                                 action="/myspringwebapp/data.xhtml?faces-redirect=true"/>
                                  
             </h:form>
         </div>

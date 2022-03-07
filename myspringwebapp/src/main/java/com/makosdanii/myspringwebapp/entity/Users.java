@@ -44,7 +44,7 @@ public class Users implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "roleid", referencedColumnName = "id")
     private Roles roles;
 

@@ -5,7 +5,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/xhtml.xhtml to edit this te
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <title>Register users</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,23 +14,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/xhtml.xhtml to edit this te
     <h:body>
         <h:form>
             <label for="email">email</label>
-            <h:inputText id="email" value="#{registrate.email}"/>
+            <h:inputText id="email" value="#{registrate.email}"
+                         validatorMessage="Email format required">
+                <f:validateRegex pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+                                 for="email"/>
+            </h:inputText>
+            <h:message for='email' />
             <br/>
+            
             <label for="firstname">firstname</label>
-            <h:inputText id="firstname" value="#{registrate.firstname}"/>
+            <h:inputText id="firstname" value="#{registrate.firstname}"
+                         validatorMessage="Cannot be empty">
+                <f:validateRequired for='firstname' />
+            </h:inputText>
+            <h:message for='firstname' />
+
             <br/>
             <label for="lastname">lastname</label>
-            <h:inputText id="lastname" value="#{registrate.lastname}"/>
+            <h:inputText id="lastname" value="#{registrate.lastname}"
+                         validatorMessage="Cannot be empty">
+                <f:validateRequired for='lastname' />
+            </h:inputText>
+            <h:message for='lastname' />
+
             <br/>
             <label for="address">address</label>
             <h:inputText id="address" value="#{registrate.address}"/>
             <br/>
+            
             <label for="password">password</label>
-            <h:inputSecret id="password" value="#{registrate.password}"/>
+            <h:inputSecret id="password" value="#{registrate.password}"
+                           validatorMessage="Password format required">
+                <f:validateRegex pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                                 for="password"/>
+            </h:inputSecret>
+            <h:message for="password" />
             <br/>
+            
             <label for="isAdminCheckbox">Admin user: </label>
             <h:selectBooleanCheckbox id="isAdminCheck"
-                value = "#{registrate.isAdmin}" disabled="#{!sessionScope.isAdmin}"/>
+                                     value = "#{registrate.isAdmin}" disabled="#{!sessionScope.isAdmin}"/>
             <h:commandButton value="Registrate" action="#{registrate.registrate}" />
         </h:form>
     </h:body>

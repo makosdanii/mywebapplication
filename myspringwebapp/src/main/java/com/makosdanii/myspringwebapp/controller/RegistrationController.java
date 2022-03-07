@@ -5,7 +5,6 @@
 package com.makosdanii.myspringwebapp.controller;
 
 import com.makosdanii.myspringwebapp.business.UserService;
-import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;

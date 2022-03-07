@@ -95,6 +95,6 @@ public class JsfController implements Serializable {
     }
 
     public String redirectData() {
-        return "/data.xhtml?faces-redirect=true";
+        return "/myspringwebapp/data.xhtml?faces-redirect=true";
     }
 }

@@ -18,7 +18,8 @@ public class MyspringwebappApplication extends SpringBootServletInitializer {
     public ServletRegistrationBean servletRegistrationBean() {
         FacesServlet servlet = new FacesServlet();
         ServletRegistrationBean servletRegistrationBean
-                = new ServletRegistrationBean(servlet, "*.jsf");
+                = new ServletRegistrationBean(servlet, 
+                        "/myspringwebapp/*");
         return servletRegistrationBean;
     }
 }
