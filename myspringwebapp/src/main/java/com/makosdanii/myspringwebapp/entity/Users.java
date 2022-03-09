@@ -4,8 +4,10 @@
  */
 package com.makosdanii.myspringwebapp.entity;
 
+import com.makosdanii.myspringwebapp.repository.UserRepository;
 import com.sun.istack.NotNull;
 import java.io.Serializable;
+import javax.inject.Inject;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
+import org.springframework.data.domain.Persistable;
 
 /**
  *
@@ -107,4 +109,14 @@ public class Users implements Serializable {
     public void setRoles(Roles roles) {
         this.roles = roles;
     }
+
+//    @Override
+//    public boolean isNew() {
+//        return userRepo.existsById(this.email);
+//    }
+//
+//    @Override
+//    public String getId() {
+//        return this.email;
+//    }
 }

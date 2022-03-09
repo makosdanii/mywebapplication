@@ -59,7 +59,7 @@ public class DataController implements Serializable {
 
     private final UserRepository repoUser;
     private final RoleRepository repoRole;
-    private final UserService userServ;
+        private final UserService userServ;
 
     private Users queried;
 

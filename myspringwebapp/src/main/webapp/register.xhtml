@@ -6,55 +6,51 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/xhtml.xhtml to edit this te
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
         <title>Register users</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+    </h:head>
     <h:body>
-        <h:form>
-            <label for="email">email</label>
-            <h:inputText id="email" value="#{registrate.email}"
-                         validatorMessage="Email format required">
-                <f:validateRegex pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
-                                 for="email"/>
-            </h:inputText>
-            <h:message for='email' />
-            <br/>
-            
-            <label for="firstname">firstname</label>
-            <h:inputText id="firstname" value="#{registrate.firstname}"
-                         validatorMessage="Cannot be empty">
-                <f:validateRequired for='firstname' />
-            </h:inputText>
-            <h:message for='firstname' />
+        <h:form id="register">
+            <p:panelGrid columns="2">
+                    <label for="email">Email</label><br/>
+                    <h:inputText id="email" value="#{registrate.email}"
+                                 validatorMessage="Email format required"
+                                 required="true" requiredMessage="Email left empty">
+                        <f:validateRegex pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+                                         for="email"/>
+                    </h:inputText><br/>
+                    <label for="firstname">Firstname</label><br/>
+                    <h:inputText id="firstname" value="#{registrate.firstname}"
+                                 required="true" requiredMessage="Firstname left empty">
+                    </h:inputText><br/>
+                    <label for="lastname">Lastname</label><br/>
+                    <h:inputText id="lastname" value="#{registrate.lastname}"
+                                 required="true" requiredMessage="Lastname left empty">
+                    </h:inputText><br/>
+                    <label for="address">Address</label><br/>
+                    <h:inputText id="address" value="#{registrate.address}"/><br/>
+                    <label for="password">Password</label><br/>
+                    <h:inputSecret id="password" value="#{registrate.password}"
+                                   validatorMessage="Password be 8 character with digit(s) and capital letter(s)"
+                                   required="true" requiredMessage="Password left empty">
+                        <f:validateRegex pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                                         for="password"/>
+                    </h:inputSecret><br/>
+                    <label for="isAdminCheckbox">Admin user </label>
+                    <h:selectBooleanCheckbox id="isAdminCheck"
+                                             value = "#{registrate.isAdmin}" disabled="#{!sessionScope.isAdmin}"/>
+            </p:panelGrid><br/>
 
-            <br/>
-            <label for="lastname">lastname</label>
-            <h:inputText id="lastname" value="#{registrate.lastname}"
-                         validatorMessage="Cannot be empty">
-                <f:validateRequired for='lastname' />
-            </h:inputText>
-            <h:message for='lastname' />
-
-            <br/>
-            <label for="address">address</label>
-            <h:inputText id="address" value="#{registrate.address}"/>
-            <br/>
-            
-            <label for="password">password</label>
-            <h:inputSecret id="password" value="#{registrate.password}"
-                           validatorMessage="Password format required">
-                <f:validateRegex pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
-                                 for="password"/>
-            </h:inputSecret>
-            <h:message for="password" />
-            <br/>
-            
-            <label for="isAdminCheckbox">Admin user: </label>
-            <h:selectBooleanCheckbox id="isAdminCheck"
-                                     value = "#{registrate.isAdmin}" disabled="#{!sessionScope.isAdmin}"/>
-            <h:commandButton value="Registrate" action="#{registrate.registrate}" />
+            <p:commandButton value="Register" action="#{registrate.registrate}"
+                             process="@form" update="@(.ui-message)"/>
+            <p:message for='email' />
+            <p:message for='firstname' />
+            <p:message for='lastname' />
+            <p:message for="password" />
+            <p:message for="register"/>
         </h:form>
     </h:body>
 </html>

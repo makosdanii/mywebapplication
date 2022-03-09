@@ -1,0 +1,36 @@
+INFO    2022-03-08 11:34:54,667 [main] com.makosdanii.myspringwebapp.business.UserService  - Started
+INFO    2022-03-08 11:37:53,570 [main] com.makosdanii.myspringwebapp.business.UserService  - Started
+INFO    2022-03-08 11:37:53,571 [main] com.makosdanii.myspringwebapp.business.UserService  - sun.misc.Launcher$AppClassLoader@73d16e93
+INFO    2022-03-08 11:38:56,749 [main] com.makosdanii.myspringwebapp.business.UserService  - Started
+INFO    2022-03-08 11:38:56,750 [main] com.makosdanii.myspringwebapp.business.UserService  - C:\Users\user\NetBeansProjects\mywebapplication\myspringwebapp
+INFO    2022-03-08 13:32:43,258 [main] com.makosdanii.myspringwebapp.business.UserService  - Started
+INFO    2022-03-08 13:33:04,131 [http-nio-8080-exec-6] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id admin@mydomain.com
+INFO    2022-03-08 13:34:46,662 [http-nio-8080-exec-3] com.makosdanii.myspringwebapp.business.UserService  - Deleted user with id user@mydomain.com
+INFO    2022-03-08 13:35:46,995 [main] com.makosdanii.myspringwebapp.business.UserService  - Started
+INFO    2022-03-08 13:36:02,582 [http-nio-8080-exec-3] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id admin@mydomain.com
+INFO    2022-03-08 13:41:47,612 [main] com.makosdanii.myspringwebapp.business.UserService  - Started
+INFO    2022-03-08 13:42:08,187 [http-nio-8080-exec-2] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id admin@mydomain.com
+INFO    2022-03-08 13:43:00,889 [http-nio-8080-exec-6] com.makosdanii.myspringwebapp.business.UserService  - Added user with id test@mydomain.com
+INFO    2022-03-08 13:49:47,724 [http-nio-8080-exec-8] com.makosdanii.myspringwebapp.business.UserService  - Deleted user with id test@mydomain.com
+INFO    2022-03-08 13:52:47,156 [http-nio-8080-exec-7] com.makosdanii.myspringwebapp.business.UserService  - Added user with id test@mydomain.com
+INFO    2022-03-08 13:59:40,389 [main] com.makosdanii.myspringwebapp.business.UserService  - Started
+INFO    2022-03-08 13:59:57,359 [http-nio-8080-exec-3] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id admin@mydomain.com
+INFO    2022-03-08 14:03:49,627 [http-nio-8080-exec-1] com.makosdanii.myspringwebapp.business.UserService  - Filtered for test
+INFO    2022-03-08 14:03:54,417 [http-nio-8080-exec-2] com.makosdanii.myspringwebapp.business.UserService  - Filtered for 
+INFO    2022-03-08 15:27:16,715 [main] com.makosdanii.myspringwebapp.business.UserService  - Started
+INFO    2022-03-08 15:27:35,111 [http-nio-8080-exec-3] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id admin@mydomain.com
+INFO    2022-03-08 15:28:27,674 [http-nio-8080-exec-8] com.makosdanii.myspringwebapp.business.UserService  - Deleted user with id test@mydomain.com
+INFO    2022-03-08 15:32:18,489 [http-nio-8080-exec-6] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id admin@mydomain.com
+INFO    2022-03-08 15:33:36,373 [http-nio-8080-exec-10] com.makosdanii.myspringwebapp.business.UserService  - Filtered for user
+INFO    2022-03-08 15:36:48,114 [http-nio-8080-exec-5] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id admin@mydomain.com
+INFO    2022-03-08 15:37:15,745 [http-nio-8080-exec-8] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id admin@mydomain.com
+INFO    2022-03-08 15:37:33,631 [http-nio-8080-exec-1] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id asdf
+INFO    2022-03-08 15:37:44,321 [http-nio-8080-exec-2] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id admin@mydomain.com
+INFO    2022-03-08 15:49:14,706 [http-nio-8080-exec-5] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id sadfas
+INFO    2022-03-08 15:49:30,884 [http-nio-8080-exec-6] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id admin@mydomain.com
+INFO    2022-03-08 15:49:36,247 [http-nio-8080-exec-7] com.makosdanii.myspringwebapp.business.UserService  - Auth process for id admin@mydomain.com
+INFO    2022-03-08 15:52:19,865 [http-nio-8080-exec-10] com.makosdanii.myspringwebapp.business.UserService  - Added user with id test@mydomain.com
+INFO    2022-03-08 15:53:16,013 [http-nio-8080-exec-4] com.makosdanii.myspringwebapp.business.UserService  - Filtered for test
+INFO    2022-03-08 15:53:38,225 [http-nio-8080-exec-5] com.makosdanii.myspringwebapp.business.UserService  - Deleted user with id test@mydomain.com
+INFO    2022-03-08 15:54:01,715 [http-nio-8080-exec-9] com.makosdanii.myspringwebapp.business.UserService  - Filtered for 
+INFO    2022-03-08 16:04:38,325 [http-nio-8080-exec-1] com.makosdanii.myspringwebapp.business.UserService  - Filtered for domain

@@ -7,6 +7,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/xhtml.xhtml to edit this te
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
         <title>Listed users</title>
@@ -14,38 +15,36 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/xhtml.xhtml to edit this te
     </h:head>
     <h:body rendered="#{sessionScope.isAdmin}">
         <h:panelGroup layout="block" id="dataTable">
-            <h:dataTable border="1" value="#{data.users}" var="user">
-                <h:column>
-                    <f:facet name="header">Email</f:facet>
+            <p:dataTable value="#{data.users}" var="user">
+                <p:column headerText="Email">
                     <h:outputText value="#{user.email}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Name</f:facet>
+                </p:column>
+                <p:column headerText="Name">
                     <h:outputText value="#{user.firstname} #{user.lastname}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Address</f:facet>
+                </p:column>
+                <p:column headerText="Address">
                     <h:outputText value="#{user.address}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Passworld</f:facet>
+                </p:column>
+                <p:column headerText="Password">
                     <h:outputText value="#{user.password}" />
-                </h:column>
-                <h:column>
+                </p:column>
+                <p:column headerText="">
+                    <f:param name="id" value="#{user.email}" />
                     <a href="/delete?id=#{user.email}">delete</a>
-                    <!--<f:param name="id" value="#{user.email}" />-->
-                    <!--<h:commandLink value="delete" action="/delete"/>-->
-                </h:column>
-            </h:dataTable>
+<!--                    <p:commandButton value="delete" action="" 
+                                     update="dataTable">
+                        <f:param name="id" value="#{user.email}" />
+                    </p:commandButton>-->
+                </p:column>
+            </p:dataTable>
         </h:panelGroup>
-
+        <br/>
         <h:form >
-            <input id="search" name="query" value="#{param['query']}"> 
-            </input>
             <f:param name="query" value="#{param['query']}" />
-            <h:commandButton  value="Search" action="#{data.filter}">
-                <f:ajax execute="@this" render="dataTable" listener="#{data.ajaxFilter}"/>
-            </h:commandButton>
+            <input name="query" id="search" value="#{param['query']}"/> 
+            <p:commandButton value="Search" action="#{data.filter}"
+                             process="@form" update="dataTable"/>
+
         </h:form>   
 
     </h:body>
