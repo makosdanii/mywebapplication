@@ -22,10 +22,5 @@ VALUES ("admin@mydomain.com", "ad", "min","admin", 1);
 INSERT INTO USERS (email, firstname, lastname, password, roleid) 
 VALUES ("user@mydomain.com", "us", "er","user", 2);
 
--- select * from users;
--- select * from roles;
-
--- insert into users (email, firstname, lastname, password, roleid)
--- values ("test", "a", "s", "d", 3);
-
--- delete from users where roleid = 3;
+select * from users;
+select * from roles;
